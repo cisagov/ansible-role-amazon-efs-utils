@@ -1,0 +1,44 @@
+---
+- name: Install amazon-efs-utils prerequisites
+  package:
+    name:
+      - make
+      - rpm-build
+
+- name: Load tasks file with common install tasks
+  include: install_common.yml
+
+# There are some ambiguous Python shebangs in the aws/efs-utils code,
+# which is python2-only.  On Fedora 31, the
+# /usr/lib/rpm/redhat/brp-mangle-shebangs tool refuses to allow the
+# rpm to be built because of this.
+#
+# The real solution is for AWS to update their code, but until then we
+# can manually tweak the shebang to use python2.
+- name: Fix Python ambiguous shebangs
+  replace:
+    path: "{{ item }}"
+    regexp: "^#!/usr/bin/env python$"
+    replace: "#!/usr/bin/env python2"
+  loop:
+    - /tmp/efs-utils/src/mount_efs/__init__.py
+    - /tmp/efs-utils/src/watchdog/__init__.py
+  when:
+    - ansible_distribution == "Fedora"
+    - ansible_distribution_version|int >= 31|int
+
+- name: Build rpms from the aws/efs-utils code
+  make:
+    chdir: /tmp/efs-utils
+    target: rpm
+
+- name: Find all aws/efs-utils rpms that were built
+  find:
+    paths: /tmp/efs-utils/build
+    patterns: "amazon-efs-utils*.rpm"
+  register: find_result
+
+- name: Install aws/efs-utils deb packages
+  yum:
+    name: "{{ item }}"
+  loop: "{{ find_result | json_query('files[*].path') }}"
