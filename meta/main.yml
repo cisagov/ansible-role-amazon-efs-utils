@@ -1,7 +1,7 @@
 ---
 galaxy_info:
-  author: First Last
-  description: Skeleton Ansible role
+  author: Shane Frasier
+  description: Install AWS EFS utils
   company: CISA Cyber Assessments
   license: CC0
   min_ansible_version: 2.0
@@ -13,6 +13,9 @@ galaxy_info:
       versions:
         - stretch
         - buster
+        # Kali linux isn't an option here, but it is based on Debian
+        # testing
+        - bullseye
     - name: Fedora
       versions:
         - 29
@@ -22,6 +25,7 @@ galaxy_info:
         # - 30
         - 31
   galaxy_tags:
-    - skeleton
+    - aws
+    - efs
 
 dependencies: []
