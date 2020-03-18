@@ -12,6 +12,10 @@
   make:
     chdir: /tmp/efs-utils
     target: rpm
+  # This task always runs and recreates the rpms, no matter what.
+  # Let's ignore this task when running the idempotence check.
+  tags:
+    - molecule-idempotence-notest
 
 - name: Find all aws/efs-utils rpms that were built
   find:
