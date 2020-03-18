@@ -4,6 +4,7 @@
 import os
 
 # Third-Party Libraries
+import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
@@ -27,3 +28,9 @@ def test_packages(host):
     installed = [package.is_installed for package in packages]
     assert len(pkgs) != 0
     assert all(installed)
+
+
+@pytest.mark.parametrize("service", ["amazon-efs-mount-watchdog"])
+def test_services(host, service):
+    """Test that the expected services were enabled."""
+    assert host.service(service).is_enabled
