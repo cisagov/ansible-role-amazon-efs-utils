@@ -15,3 +15,8 @@
         - install_Debian.yml
       paths:
         - tasks
+
+- name: Enable Amazon EFS mount watchdog service
+  service:
+    name: amazon-efs-mount-watchdog
+    enabled: yes
