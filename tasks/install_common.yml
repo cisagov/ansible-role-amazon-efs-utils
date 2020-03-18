@@ -6,7 +6,8 @@
 
 - name: Download a tarball of the aws/efs-utils repository
   unarchive:
-    src: https://github.com/aws/efs-utils/tarball/master
+    # s/jsf9k/aws once aws/efs-utils#48 is merged
+    src: https://github.com/jsf9k/efs-utils/tarball/master
     dest: /tmp/efs-utils
     remote_src: yes
     extra_opts:
