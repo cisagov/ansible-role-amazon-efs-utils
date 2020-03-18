@@ -24,6 +24,10 @@ galaxy_info:
         # can't use Fedora 30.
         # - 30
         - 31
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
   galaxy_tags:
     - aws
     - efs
