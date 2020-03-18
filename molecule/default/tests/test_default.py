@@ -16,7 +16,7 @@ def test_packages(host):
     distribution = host.system_info.distribution
     if distribution == "fedora":
         pkgs = ["make", "rpm-build", "amazon-efs-utils"]
-    elif distribution == "debian" or distribution == "kali":
+    elif distribution == "debian" or distribution == "ubuntu" or distribution == "kali":
         pkgs = ["make", "binutils", "amazon-efs-utils"]
     elif distribution == "amzn":
         pkgs = ["amazon-efs-utils"]
