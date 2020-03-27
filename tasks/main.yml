@@ -14,7 +14,7 @@
         # Debian setup tasks file.
         - install_Debian.yml
       paths:
-        - tasks
+        - "{{ role_path }}/tasks"
 
 - name: Enable Amazon EFS mount watchdog service
   service:
