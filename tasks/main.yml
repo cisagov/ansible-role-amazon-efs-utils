@@ -9,6 +9,7 @@
         # Add regex_replace() filters to remove spaces and
         # slashes. This allows the OS family/distribution for Kali,
         # "Kali GNU/Linux", to be easily mapped to a vars file.
+        - install_{{ ansible_distribution | regex_replace('[ /]', '_') }}_{{ ansible_distribution_version }}.yml
         - install_{{ ansible_distribution | regex_replace('[ /]', '_') }}.yml
         - install_{{ ansible_os_family | regex_replace('[ /]', '_') }}.yml
       paths:
