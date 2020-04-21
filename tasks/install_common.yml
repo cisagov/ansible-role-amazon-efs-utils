@@ -12,6 +12,7 @@
     extra_opts:
       - "--strip-components=1"
   # The contents of the tarball are modified in some cases by the
-  # Makefile it contains, so we need to noqa this task to pass
+  # Makefile it contains, so we need to tag this task to skip
   # idempotence testing.
-  changed_when: false
+  tags:
+    - molecule-idempotence-notest
