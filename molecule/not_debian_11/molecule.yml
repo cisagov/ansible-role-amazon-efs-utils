@@ -30,13 +30,6 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
     pre_build_image: yes
-  - name: debian11_systemd
-    image: cisagov/docker-debian11-ansible:latest
-    privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /lib/systemd/systemd
-    pre_build_image: yes
   - name: kali_systemd
     image: cisagov/docker-kali-ansible:latest
     privileged: yes
@@ -92,7 +85,7 @@ provisioner:
       # underscores when creating the group name.
       force_valid_group_names: always
 scenario:
-  name: default
+  name: not_debian_11
 verifier:
   name: testinfra
   directory: ../tests
