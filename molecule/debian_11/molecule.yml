@@ -47,6 +47,11 @@ scenario:
     # this by forcing the installation of python2, which causes
     # Ansible to try to install python-apt during idempotence.  This
     # package does not exist in Debian 11 (Bullseye).
+    #
+    # I have created aws/efs-utils#57 to encourage the good folks at
+    # aws/efs-utils to support python3 in their packaging.  (The code
+    # itself already supports python3.)  Once that happens, everything
+    # can go back into the default scenario again.
     # - idempotence
     - side_effect
     - verify
