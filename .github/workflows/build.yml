@@ -74,4 +74,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade --requirement requirements-test.txt
       - name: Run molecule tests
-        run: molecule test
+        run: |
+          molecule test --scenario-name=not_debian_11 &&
+          molecule test --scenario-name=debian_11
