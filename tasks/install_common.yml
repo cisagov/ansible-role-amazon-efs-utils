@@ -9,7 +9,7 @@
   unarchive:
     src: https://github.com/aws/efs-utils/tarball/master
     dest: /tmp/efs-utils
-    mode: 0644
+    mode: 0755
     remote_src: yes
     extra_opts:
       - "--strip-components=1"
