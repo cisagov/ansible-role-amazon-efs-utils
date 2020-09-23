@@ -1,6 +1,7 @@
 ---
 - name: Create the /tmp/efs-utils directory
   file:
+    mode: 0644
     path: /tmp/efs-utils
     state: directory
 
@@ -8,6 +9,7 @@
   unarchive:
     src: https://github.com/aws/efs-utils/tarball/master
     dest: /tmp/efs-utils
+    mode: 0644
     remote_src: yes
     extra_opts:
       - "--strip-components=1"
