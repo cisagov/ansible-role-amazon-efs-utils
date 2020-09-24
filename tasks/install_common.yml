@@ -1,7 +1,7 @@
 ---
 - name: Create the /tmp/efs-utils directory
   file:
-    mode: 0644
+    mode: 0755
     path: /tmp/efs-utils
     state: directory
 
