@@ -25,5 +25,6 @@
 
 - name: Install aws/efs-utils rpms
   yum:
+    disable_gpg_check: yes
     name: "{{ item }}"
   loop: "{{ find_result | json_query('files[*].path') }}"
