@@ -9,6 +9,7 @@
   unarchive:
     src: https://github.com/aws/efs-utils/tarball/master
     dest: /tmp/efs-utils
+    # Mode here must match mode above or else idempotence fails
     mode: 0755
     remote_src: yes
     extra_opts:
