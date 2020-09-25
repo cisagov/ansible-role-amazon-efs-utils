@@ -6,11 +6,12 @@
     state: directory
 
 - name: Download a tarball of the aws/efs-utils repository
-  unarchive:
+  # ansible-lint E208 gives an error if we don't specify the mode,
+  # but we definitely don't want to do that here since it will
+  # override the permissions on the files in the archive.
+  unarchive: # noqa 208
     src: https://github.com/aws/efs-utils/tarball/master
     dest: /tmp/efs-utils
-    # Mode here must match mode above or else idempotence fails
-    mode: 0755
     remote_src: yes
     extra_opts:
       - "--strip-components=1"
