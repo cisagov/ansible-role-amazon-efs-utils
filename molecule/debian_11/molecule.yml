@@ -1,4 +1,10 @@
 ---
+# This molecule configuration file is suitable for testing Ansible
+# roles that _do_ require SystemD.  If your Ansible role _does not_
+# require SystemD then you should use molecule-no-systemd.yml instead.
+#
+# Note that the molecule configuration file that is symlinked to
+# molecule.yml is the one that will be used.
 dependency:
   name: galaxy
 driver:
@@ -32,31 +38,37 @@ provisioner:
       # space and the slash.  This option converts those characters to
       # underscores when creating the group name.
       force_valid_group_names: always
+  inventory:
+    host_vars:
+      debian9_systemd:
+        # auto_legacy is still the default behavior until Ansible 2.12
+        # is released, but Molecule overrides this and forces the use
+        # of auto.
+        #
+        # In auto_legacy mode Ansible will prefer the /usr/bin/python
+        # interpreter if it exists, while in auto mode it will prefer
+        # the Python interpreter specified in an internal map.  In
+        # most cases we only have Python3 installed, and the internal
+        # map specifies /usr/bin/python3, so it is immaterial whether
+        # we use auto_legacy or auto.
+        #
+        # The one place where it _does_ matter is our Debian9 AKA CyHy
+        # instances.  Here the /usr/bin/python _and_ /usr/bin/python3
+        # interpreters are both installed.  In Ansible 2.10 a Debian
+        # entry was added to the internal map, so now auto_legacy
+        # selects the /usr/bin/python interpreter while auto selects
+        # the /usr/bin/python3 interpreter.  We want to maintain the
+        # auto_legacy behavior in this case since CyHy is still
+        # Python2.
+        #
+        # See:
+        # * https://github.com/ansible-community/molecule/blob/3.0.8/molecule/provisioner/ansible.py#L389
+        # * https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html#interpreter-discovery
+        # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/config/base.yml#L1492-L1542
+        # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
+        ansible_python_interpreter: auto_legacy
 scenario:
   name: debian_11
-  test_sequence:
-    - dependency
-    - lint
-    - cleanup
-    - destroy
-    - syntax
-    - create
-    - prepare
-    - converge
-    # We remove idempotence since aws/efs-utils breaks it.  It does
-    # this by forcing the installation of python2, which causes
-    # Ansible to try to install python-apt during idempotence.  This
-    # package does not exist in Debian 11 (Bullseye).
-    #
-    # I have created aws/efs-utils#57 to encourage the good folks at
-    # aws/efs-utils to support python3 in their packaging.  (The code
-    # itself already supports python3.)  Once that happens, everything
-    # can go back into the default scenario again.
-    # - idempotence
-    - side_effect
-    - verify
-    - cleanup
-    - destroy
 verifier:
   name: testinfra
   directory: ../tests

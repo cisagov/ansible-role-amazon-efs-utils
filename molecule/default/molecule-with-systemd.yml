@@ -36,6 +36,20 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
     pre_build_image: yes
+  - name: debian11_systemd
+    image: cisagov/docker-debian11-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: kali_systemd
+    image: cisagov/docker-kali-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
   - name: fedora32_systemd
     image: geerlingguy/docker-fedora32-ansible:latest
     privileged: yes
@@ -110,7 +124,7 @@ provisioner:
         # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
         ansible_python_interpreter: auto_legacy
 scenario:
-  name: not_debian_11
+  name: default
 verifier:
   name: testinfra
   directory: ../tests
