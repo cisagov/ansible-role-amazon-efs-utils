@@ -1,7 +1,8 @@
 ---
 # This molecule configuration file is suitable for testing Ansible
-# roles that _do_ require SystemD.  If your Ansible role _does not_
-# require SystemD then you should use molecule-no-systemd.yml instead.
+# roles that _do not_ require SystemD.  If your Ansible role _does_
+# require SystemD then you should use molecule-with-systemd.yml
+# instead.
 #
 # Note that the molecule configuration file that is symlinked to
 # molecule.yml is the one that will be used.
@@ -15,24 +16,27 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: debian11_systemd
-    groups:
-      - force_python3
-    image: cisagov/docker-debian11-ansible:latest
-    privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /lib/systemd/systemd
-    pre_build_image: yes
-  - name: kali_systemd
-    groups:
-      - force_python3
-    image: cisagov/docker-kali-ansible:latest
-    privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /lib/systemd/systemd
-    pre_build_image: yes
+  - name: amazonlinux2
+    image: amazonlinux:2
+  - name: debian9
+    image: debian:stretch-slim
+    dockerfile: Dockerfile_debian_9.j2
+  - name: debian10
+    image: debian:buster-slim
+  - name: debian11
+    image: debian:bullseye-slim
+  - name: kali
+    image: kalilinux/kali-rolling
+  - name: fedora32
+    image: fedora:32
+  - name: fedora33
+    image: fedora:33
+  - name: ubuntu16
+    image: ubuntu:xenial
+  - name: ubuntu18
+    image: ubuntu:bionic
+  - name: ubuntu20
+    image: ubuntu:focal
 provisioner:
   name: ansible
   config_options:
@@ -43,38 +47,8 @@ provisioner:
       # underscores when creating the group name.
       force_valid_group_names: always
   inventory:
-    group_vars:
-      force_python3:
-        # auto_legacy is still the default behavior until Ansible 2.12
-        # is released, but Molecule overrides this and forces the use
-        # of auto.
-        #
-        # In auto mode Ansible will prefer the Python interpreter
-        # specified in an internal map.  If there is no entry in the
-        # internal map then Ansible will search an ordered list of
-        # potential Python locations and use the first Python
-        # executable from that list that it finds.  At the top of that
-        # list is /usr/bin/python.
-        #
-        # In most cases the internal map specifies /usr/bin/python3,
-        # but neither Debian 11 nor Kali Linux are listed in the
-        # internal map.  Since the installation of amazon-efs-utils
-        # forces the installation of Python 2 (located at
-        # /usr/bin/python), this means that Ansible ends up using
-        # /usr/bin/python3 for the converge playbook but
-        # /usr/bin/python for the idempotence playbook.  This causes
-        # those two platforms to fail idempotence.
-        #
-        # To get around this we force the use of /usr/bin/python3 for
-        # these two platforms.
-        #
-        # See:
-        # * https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html#interpreter-discovery
-        # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/config/base.yml#L1492-L1542
-        # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
-        ansible_python_interpreter: /usr/bin/python3
     host_vars:
-      debian9_systemd:
+      debian9:
         # auto_legacy is still the default behavior until Ansible 2.12
         # is released, but Molecule overrides this and forces the use
         # of auto.
@@ -102,7 +76,6 @@ provisioner:
         # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
         ansible_python_interpreter: auto_legacy
 scenario:
-  name: debian_11
+  name: default
 verifier:
   name: testinfra
-  directory: ../tests

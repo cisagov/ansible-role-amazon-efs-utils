@@ -15,6 +15,27 @@ lint: |
   ansible-lint
   flake8
 platforms:
+  - name: amazonlinux2_systemd
+    image: geerlingguy/docker-amazonlinux2-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian9_systemd
+    image: geerlingguy/docker-debian9-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: debian10_systemd
+    image: geerlingguy/docker-debian10-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
   - name: debian11_systemd
     groups:
       - force_python3
@@ -28,6 +49,41 @@ platforms:
     groups:
       - force_python3
     image: cisagov/docker-kali-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora32_systemd
+    image: geerlingguy/docker-fedora32-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: fedora33_systemd
+    image: geerlingguy/docker-fedora33-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_16_systemd
+    image: geerlingguy/docker-ubuntu1604-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_18_systemd
+    image: geerlingguy/docker-ubuntu1804-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
+  - name: ubuntu_20_systemd
+    image: geerlingguy/docker-ubuntu2004-ansible:latest
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -102,7 +158,7 @@ provisioner:
         # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
         ansible_python_interpreter: auto_legacy
 scenario:
-  name: debian_11
+  name: default
 verifier:
   name: testinfra
   directory: ../tests
