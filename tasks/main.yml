@@ -6,9 +6,9 @@
   vars:
     params:
       files:
-        - "install_{{ ansible_distribution }}_{{ ansible_distribution_version }}.yml"
-        - "install_{{ ansible_distribution }}.yml"
-        - "install_{{ ansible_os_family }}.yml"
+        - install_{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml
+        - install_{{ ansible_distribution }}.yml
+        - install_{{ ansible_os_family }}.yml
       paths:
         - "{{ role_path }}/tasks"
 
