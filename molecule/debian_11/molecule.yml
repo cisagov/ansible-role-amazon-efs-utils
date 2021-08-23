@@ -18,7 +18,7 @@ platforms:
   - name: debian11_systemd
     groups:
       - force_python3
-    image: cisagov/docker-debian11-ansible:latest
+    image: geerlingguy/docker-debian11-ansible:latest
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
