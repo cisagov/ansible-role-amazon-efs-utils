@@ -1,15 +1,15 @@
 ---
 - name: Install amazon-efs-utils prerequisites
-  package:
+  ansible.builtin.package:
     name:
       - make
       - rpm-build
 
 - name: Load tasks file with common install tasks
-  include: install_common.yml
+  ansible.builtin.include: install_common.yml
 
 - name: Build rpms from the aws/efs-utils code
-  make:
+  ansible.builtin.make:
     chdir: /tmp/efs-utils
     target: rpm
   # This task always runs and recreates the rpms, no matter what.
@@ -18,13 +18,13 @@
     - molecule-idempotence-notest
 
 - name: Find all aws/efs-utils rpms that were built
-  find:
+  ansible.builtin.find:
     paths: /tmp/efs-utils/build
     patterns: "amazon-efs-utils*.rpm"
   register: find_result
 
 - name: Install aws/efs-utils rpms
-  yum:
+  ansible.builtin.yum:
     disable_gpg_check: yes
     name: "{{ item }}"
   loop: "{{ find_result | json_query('files[*].path') }}"

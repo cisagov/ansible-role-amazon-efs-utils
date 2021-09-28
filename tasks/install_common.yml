@@ -1,12 +1,12 @@
 ---
 - name: Create the /tmp/efs-utils directory
-  file:
+  ansible.builtin.file:
     mode: 0755
     path: /tmp/efs-utils
     state: directory
 
 - name: Download a tarball of the aws/efs-utils repository
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://github.com/aws/efs-utils/tarball/master
     dest: /tmp/efs-utils
     remote_src: yes
