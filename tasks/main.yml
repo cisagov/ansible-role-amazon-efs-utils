@@ -16,3 +16,9 @@
   ansible.builtin.service:
     name: amazon-efs-mount-watchdog
     enabled: yes
+
+- name: Create a group for EFS share users
+  ansible.builtin.group:
+    gid: "{{ efs_users_gid | default(omit) }}"
+    name: "{{ efs_users_group }}"
+  when: create_efs_users_group

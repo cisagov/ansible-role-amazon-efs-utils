@@ -34,3 +34,8 @@ def test_packages(host):
 def test_services(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
+
+
+def test_efs_users_group(host):
+    """Test that the expected group was created."""
+    assert host.group("efs_users").exists
