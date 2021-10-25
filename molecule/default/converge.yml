@@ -1,12 +1,7 @@
 ---
 - name: Converge
   hosts: all
-<<<<<<< HEAD
-  roles:
-    - role: ansible-role-amazon-efs-utils
-=======
   tasks:
-    - name: Include skeleton-ansible-role
+    - name: Include ansible-role-amazon-efs-utils
       ansible.builtin.include_role:
-        name: skeleton-ansible-role
->>>>>>> e25720218335832b4dda2287086ee9e91b778ff0
+        name: ansible-role-amazon-efs-utils
