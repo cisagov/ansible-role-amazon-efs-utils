@@ -6,7 +6,7 @@
       - binutils
 
 - name: Load tasks file with common install tasks
-  ansible.builtin.include: install_common.yml
+  ansible.builtin.include_tasks: install_common.yml
 
 - name: Build deb packages from the aws/efs-utils code
   ansible.builtin.command: ./build-deb.sh

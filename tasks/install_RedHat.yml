@@ -6,7 +6,7 @@
       - rpm-build
 
 - name: Load tasks file with common install tasks
-  ansible.builtin.include: install_common.yml
+  ansible.builtin.include_tasks: install_common.yml
 
 - name: Build rpms from the aws/efs-utils code
   ansible.builtin.make:
