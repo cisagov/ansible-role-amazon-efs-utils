@@ -107,8 +107,7 @@ jobs:
       fail-fast: false
       matrix:
         scenario:
-          - debian_11
-          - not_debian_11
+          - default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
