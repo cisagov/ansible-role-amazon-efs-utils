@@ -1,8 +1,7 @@
 # ansible-role-amazon-efs-utils #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-amazon-efs-utils/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-amazon-efs-utils/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-amazon-efs-utils.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-amazon-efs-utils/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-amazon-efs-utils.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-amazon-efs-utils/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-efs-utils/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-efs-utils/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing
 [amazon-efs-utils](https://github.com/aws/efs-utils).
@@ -34,8 +33,10 @@ Here's how to use it in a playbook:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - amazon-efs-utils
+  tasks:
+    - name: Include skeleton
+      ansible.builtin.include_role:
+        name: amazon-efs-utils
 ```
 
 ## Contributing ##
