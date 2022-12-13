@@ -6,12 +6,18 @@ on:
   pull_request:
   repository_dispatch:
     types: [apb]
+  workflow_dispatch:
+    inputs:
+      run-tmate:
+        description: Should tmate be run
+        required: false
+        default: "false"
 
 env:
   CURL_CACHE_DIR: ~/.cache/curl
   PIP_CACHE_DIR: ~/.cache/pip
   PRE_COMMIT_CACHE_DIR: ~/.cache/pre-commit
-  RUN_TMATE: ${{ secrets.RUN_TMATE }}
+  RUN_TMATE: ${{ github.event.inputs.run-tmate == 'true' || secrets.RUN_TMATE }}
 
 jobs:
   lint:
