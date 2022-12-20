@@ -36,7 +36,7 @@ Here's how to use it in a playbook:
   tasks:
     - name: Install Amazon EFS utilities
       ansible.builtin.include_role:
-        name: amazon-efs-utils
+        name: efs_utils
 ```
 
 ## Contributing ##
