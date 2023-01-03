@@ -1,7 +1,7 @@
 # ansible-role-amazon-efs-utils #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-amazon-efs-utils/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-amazon-efs-utils/actions)
-[![GitHub Build Status](https://github.com/cisagov/ansible-role-amazon-efs-utils/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-amazon-efs-utils/actions)
+[![CodeQL](https://github.com/cisagov/ansible-role-amazon-efs-utils/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-amazon-efs-utils/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing
 [amazon-efs-utils](https://github.com/aws/efs-utils).
