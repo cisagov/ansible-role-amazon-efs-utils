@@ -1,8 +1,9 @@
 ---
+dependencies: []
 galaxy_info:
   author: Shane Frasier
-  description: Install AWS EFS utils
   company: CISA Cyber Assessments
+  description: Install AWS EFS utils
   galaxy_tags:
     - aws
     - efs
@@ -29,7 +30,6 @@ galaxy_info:
         - bookworm
     - name: Fedora
       versions:
-        - "35"
         - "36"
         - "37"
     - name: Ubuntu
@@ -38,5 +38,3 @@ galaxy_info:
         - focal
         - jammy
   role_name: amazon_efs_utils
-
-dependencies: []
