@@ -1,6 +1,6 @@
 ---
 # Whether or not to create a group for EFS users
-create_efs_users_group: true
+amazon_efs_utils_create_efs_users_group: true
 
 # The name of the group to be created for EFS users
-efs_users_group: efs_users
+amazon_efs_utils_efs_users_group: efs_users
