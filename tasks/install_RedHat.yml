@@ -9,7 +9,7 @@
   ansible.builtin.include_tasks: install_common.yml
 
 - name: Build rpms from the aws/efs-utils code
-  ansible.builtin.make:
+  community.general.make:
     chdir: /tmp/efs-utils
     target: rpm
   # This task always runs and recreates the rpms, no matter what.
