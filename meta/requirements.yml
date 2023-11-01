@@ -9,9 +9,4 @@
 # both sets of dependencies must be lists. :(
 #
 # See also cisagov/skeleton-ansible-role#153.
-collections:
-  - name: community.general
-    type: galaxy
-    # We require community.general.make, which debuted in version
-    # 7.2.0 of community.general.
-    version: ">=7.2.0"
+[]
