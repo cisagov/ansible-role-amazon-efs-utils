@@ -37,8 +37,8 @@ where `requirements.yml` looks like:
 
 ```yaml
 ---
-- name: skeleton
-  src: https://github.com/cisagov/skeleton-ansible-role
+- name: amazon_efs_utils
+  src: https://github.com/cisagov/ansible-role-amazon-efs-utils
 ```
 
 and may contain other roles as well.
