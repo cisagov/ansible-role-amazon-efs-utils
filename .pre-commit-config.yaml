@@ -157,6 +157,8 @@ repos:
     rev: v24.2.0
     hooks:
       - id: ansible-lint
+        additional_dependencies:
+          - jmespath
       # files: molecule/default/playbook.yml
 
   # Terraform hooks
