@@ -25,6 +25,6 @@
 
 - name: Install aws/efs-utils rpms
   ansible.builtin.yum:
-    disable_gpg_check: yes
+    disable_gpg_check: true
     name: "{{ item }}"
   loop: "{{ find_result | json_query('files[*].path') }}"

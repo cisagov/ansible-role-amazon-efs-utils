@@ -13,7 +13,7 @@
 - name: Enable Amazon EFS mount watchdog service
   ansible.builtin.service:
     name: amazon-efs-mount-watchdog
-    enabled: yes
+    enabled: true
 
 - name: Create a group for EFS share users
   ansible.builtin.group:
