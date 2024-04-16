@@ -2,7 +2,9 @@
 - name: Install amazon-efs-utils prerequisites
   ansible.builtin.package:
     name:
+      - cargo
       - make
+      - openssl-devel
       - rpm-build
 
 - name: Load tasks file with common install tasks
