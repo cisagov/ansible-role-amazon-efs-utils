@@ -1,0 +1,8 @@
+---
+# The system packages to install.
+package_names:
+  - binutils
+  - make
+
+# The version of amazon-efs-utils to install.
+version: 1.36.0
