@@ -15,15 +15,19 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_packages(host):
     """Test that the appropriate packages were installed."""
     distribution = host.system_info.distribution
-    if distribution == "fedora":
-        pkgs = ["make", "rpm-build", "amazon-efs-utils"]
-    elif distribution == "debian" or distribution == "ubuntu" or distribution == "kali":
-        pkgs = ["make", "binutils", "amazon-efs-utils"]
-    elif distribution == "amzn":
+    codename = host.system_info.codename
+    if distribution in ["fedora"]:
+        pkgs = ["amazon-efs-utils", "cargo", "make", "openssl-devel", "rpm-build"]
+    elif distribution in ["debian", "kali", "ubuntu"]:
+        if codename in ["buster", "bullseye", "bookworm"]:
+            pkgs = ["amazon-efs-utils", "binutils", "make"]
+        else:
+            pkgs = ["amazon-efs-utils", "binutils", "cargo", "make", "pkgconf"]
+    elif distribution in ["amzn"]:
         pkgs = ["amazon-efs-utils"]
     else:
         # We don't support this distribution
-        assert False
+        assert False, f"Unsupported distribution {distribution}"
     packages = [host.package(pkg) for pkg in pkgs]
     installed = [package.is_installed for package in packages]
     assert len(pkgs) != 0

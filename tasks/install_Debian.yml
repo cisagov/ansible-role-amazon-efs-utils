@@ -1,10 +1,4 @@
 ---
-- name: Install amazon-efs-utils prerequisites
-  ansible.builtin.package:
-    name:
-      - make
-      - binutils
-
 - name: Load tasks file with common install tasks
   ansible.builtin.include_tasks: install_common.yml
 

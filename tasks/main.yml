@@ -1,4 +1,15 @@
 ---
+- name: Load vars file with values based on the OS type
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - "{{ role_path }}/vars"
+
 - name: Load tasks file with install tasks based on the OS type
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
   vars:
@@ -13,7 +24,7 @@
 - name: Enable Amazon EFS mount watchdog service
   ansible.builtin.service:
     name: amazon-efs-mount-watchdog
-    enabled: yes
+    enabled: true
 
 - name: Create a group for EFS share users
   ansible.builtin.group:
