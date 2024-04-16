@@ -1,0 +1,9 @@
+---
+amazon_efs_utils_prerequisities:
+  - cargo
+  - make
+  - openssl-devel
+  - rpm-build
+  - rust
+
+amazon_efs_utils_repository_tag: v2.0.0

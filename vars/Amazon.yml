@@ -1,0 +1,3 @@
+---
+# No variables are declared for Aamazon Linux 2023 because efs-utils is available
+# for installation from the package manager.

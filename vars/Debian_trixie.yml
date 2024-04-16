@@ -1,0 +1,9 @@
+---
+amazon_efs_utils_prerequisities:
+  - binutils
+  - cargo
+  - libssl-dev
+  - pkg-config
+  - rustc
+
+amazon_efs_utils_repository_tag: v2.0.0

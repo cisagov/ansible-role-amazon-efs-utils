@@ -1,12 +1,7 @@
 ---
 - name: Install amazon-efs-utils prerequisites
   ansible.builtin.package:
-    name:
-      - binutils
-      - cargo
-      - libssl-dev
-      - pkg-config
-      - rustc
+    name: "{{ amazon_efs_utils_prerequisities }}"
 
 - name: Load tasks file with common install tasks
   ansible.builtin.include_tasks: install_common.yml

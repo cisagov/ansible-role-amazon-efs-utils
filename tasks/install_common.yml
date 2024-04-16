@@ -7,7 +7,7 @@
 
 - name: Download a tarball of the aws/efs-utils repository
   ansible.builtin.unarchive:
-    src: https://github.com/aws/efs-utils/tarball/master
+    src: https://github.com/aws/efs-utils/tarball/refs/tags/{{ amazon_efs_utils_repository_tag }}
     dest: /tmp/efs-utils
     remote_src: true
     extra_opts:

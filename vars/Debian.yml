@@ -1,0 +1,8 @@
+---
+amazon_efs_utils_prerequisities:
+  - make
+  - binutils
+
+# Ubuntu and Debian versions older than Trixie (current testing) do not have a
+# new enough version of the Rust toolchain to build v2 of the efs-utils package.
+amazon_efs_utils_repository_tag: v1.36.0
