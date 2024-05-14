@@ -22,7 +22,14 @@ def test_packages(host):
         if codename in ["buster", "bullseye", "bookworm"]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
-            pkgs = ["amazon-efs-utils", "binutils", "cargo", "make", "pkgconf"]
+            pkgs = [
+                "amazon-efs-utils",
+                "binutils",
+                "cargo",
+                "libssl-dev",
+                "make",
+                "pkgconf",
+            ]
     elif distribution in ["amzn"]:
         pkgs = ["amazon-efs-utils"]
     else:

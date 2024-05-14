@@ -3,8 +3,9 @@
 package_names:
   - binutils
   - cargo
+  - libssl-dev
   - make
   - pkgconf
 
 # The version of amazon-efs-utils to install.
-version: 2.0.0
+version: 2.0.1
