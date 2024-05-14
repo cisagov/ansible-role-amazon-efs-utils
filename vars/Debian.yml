@@ -3,6 +3,7 @@
 package_names:
   - binutils
   - cargo
+  - libssl-dev
   - make
   - pkgconf
 
