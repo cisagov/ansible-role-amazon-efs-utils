@@ -8,4 +8,4 @@ package_names:
   - pkgconf
 
 # The version of amazon-efs-utils to install.
-version: 2.0.0
+version: 2.0.1
