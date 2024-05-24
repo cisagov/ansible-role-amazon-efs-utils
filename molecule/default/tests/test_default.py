@@ -19,7 +19,7 @@ def test_packages(host):
     if distribution in ["fedora"]:
         pkgs = ["amazon-efs-utils", "cargo", "make", "openssl-devel", "rpm-build"]
     elif distribution in ["debian", "kali", "ubuntu"]:
-        if codename in ["buster", "bullseye", "bookworm"]:
+        if codename in ["buster", "bullseye", "bookworm", "jammy"]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
             pkgs = [
