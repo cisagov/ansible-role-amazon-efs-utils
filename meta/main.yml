@@ -12,7 +12,7 @@ galaxy_info:
   galaxy_tags:
     - aws
     - efs
-  license: CC0
+  license: CC0-1.0
   # With the release of version 2.10, Ansible finally correctly
   # identifies Kali Linux as being the Kali distribution of the Debian
   # OS family.  This simplifies a lot of things for roles that support
@@ -32,8 +32,8 @@ galaxy_info:
         - trixie
     - name: Fedora
       versions:
-        - "38"
         - "39"
+        - "40"
     - name: Kali
       versions:
         - "2023"
@@ -41,5 +41,6 @@ galaxy_info:
       versions:
         - focal
         - jammy
+        - noble
   role_name: amazon_efs_utils
   standalone: true
