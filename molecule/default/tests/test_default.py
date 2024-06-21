@@ -19,9 +19,9 @@ def test_packages(host):
     if distribution in ["fedora"]:
         pkgs = ["amazon-efs-utils", "cargo", "make", "openssl-devel", "rpm-build"]
     elif distribution in ["debian", "kali", "ubuntu"]:
-        # TODO - Install version 2.x on Ubuntu Jammy when possible.
-        # See #53 for more details.
-        if codename in ["buster", "bullseye", "bookworm", "jammy"]:
+        # TODO - Install version 2.x on Ubuntu Jammy and Noble when
+        # possible.  See #53 for more details.
+        if codename in ["buster", "bullseye", "bookworm", "jammy", "noble"]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
             pkgs = [
