@@ -1,0 +1,11 @@
+---
+# The system packages to install.
+package_names:
+  - cargo
+  - make
+  - openssl-devel
+  - openssl-devel-engine
+  - rpm-build
+
+# The version of amazon-efs-utils to install.
+version: 2.1.0
