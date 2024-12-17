@@ -2,6 +2,7 @@
 # The system packages to install.
 package_names:
   - cargo
+  - gettext-envsubst
   - make
   - openssl-devel
   - openssl-devel-engine
