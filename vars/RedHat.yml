@@ -2,9 +2,10 @@
 # The system packages to install.
 package_names:
   - cargo
+  - gettext-envsubst
   - make
   - openssl-devel
   - rpm-build
 
 # The version of amazon-efs-utils to install.
-version: 2.1.0
+version: 2.2.0

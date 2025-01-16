@@ -5,4 +5,7 @@ package_names:
   - make
 
 # The version of amazon-efs-utils to install.
+#
+# Debian Bookworm has too old a version of the Cargo/Rust toolchain to
+# build version >=2.
 version: 1.36.0
