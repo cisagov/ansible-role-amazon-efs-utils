@@ -11,7 +11,7 @@
 - name: Find all aws/efs-utils deb packages that were built
   ansible.builtin.find:
     paths: /tmp/efs-utils/build
-    patterns: "amazon-efs-utils*.deb"
+    patterns: amazon-efs-utils*.deb
   register: find_result
 
 - name: Install aws/efs-utils deb packages
