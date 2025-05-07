@@ -28,7 +28,7 @@ def test_packages(host):
     elif distribution in ["debian", "kali", "ubuntu"]:
         # TODO - Install version 2.x on Ubuntu Jammy and Noble when
         # possible.  See #53 for more details.
-        if codename in ["buster", "bullseye", "bookworm", "jammy", "noble"]:
+        if codename in ["buster", "bullseye", "bookworm", "focal", "jammy", "noble"]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
             pkgs = [
