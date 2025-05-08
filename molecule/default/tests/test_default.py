@@ -19,7 +19,13 @@ def test_packages(host):
     release = host.system_info.release
     if distribution in ["fedora"]:
         if any([release.startswith(version) for version in ["39", "40"]]):
-            pkgs = ["amazon-efs-utils", "cargo", "make", "openssl-devel", "rpm-build"]
+            pkgs = [
+                "amazon-efs-utils",
+                "cargo",
+                "make",
+                "openssl-devel",
+                "rpm-build",
+            ]
         else:
             pkgs = [
                 "amazon-efs-utils",
@@ -32,7 +38,7 @@ def test_packages(host):
     elif distribution in ["debian", "kali", "ubuntu"]:
         # TODO - Install version 2.x on Ubuntu Jammy and Noble when
         # possible.  See #53 for more details.
-        if codename in ["buster", "bullseye", "bookworm", "jammy", "noble"]:
+        if codename in ["buster", "bullseye", "bookworm", "focal", "jammy", "noble"]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
             pkgs = [
