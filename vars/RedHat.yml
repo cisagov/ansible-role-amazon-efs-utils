@@ -8,4 +8,4 @@ package_names:
   - rpm-build
 
 # The version of amazon-efs-utils to install.
-version: 2.3.0
+version: 2.3.1
