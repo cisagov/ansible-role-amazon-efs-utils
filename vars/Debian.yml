@@ -3,10 +3,14 @@
 package_names:
   - binutils
   - cargo
+  - cmake
+  - gcc-13
+  - g++-13
   - gettext-base
+  - golang
   - libssl-dev
   - make
   - pkgconf
 
 # The version of amazon-efs-utils to install.
-version: 2.3.1
+version: 2.4.1

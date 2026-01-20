@@ -8,4 +8,9 @@ package_names:
   - rpm-build
 
 # The version of amazon-efs-utils to install.
+#
+# We can't install version 2.4 yet since it currently only builds
+# under gcc<=13 and RedHat doesn't provide anything older than gcc 14.
+# See here for more details:
+# https://github.com/aws/efs-utils/blob/master/INSTALL.md#gcc-version-requirements
 version: 2.3.1
