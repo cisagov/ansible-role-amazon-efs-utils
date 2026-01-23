@@ -1,12 +1,17 @@
 ---
+# The version of gcc to use when building aws/efs-utils on this
+# platform.  aws/efs-utils requires gcc<=13, so we use the latest
+# version of gcc that is <=13 but available on the platform.
+gcc_version: 11
+
 # The system packages to install.  See here for more details:
 # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md
 package_names:
   - binutils
   - cargo
   - cmake
-  - gcc-11
-  - g++-11
+  - gcc-{{ gcc_version }}
+  - g++-{{ gcc_version }}
   - gettext-base
   - golang
   - libssl-dev

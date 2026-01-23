@@ -3,60 +3,24 @@
   ansible.builtin.include_tasks: install_common.yml
 
 - name: >-
-    Build deb packages from the aws/efs-utils code (Debian post-Bookworm,
-    Kali, and Ubuntu Noble)
+    Build deb packages from the aws/efs-utils code (Debian post-Bullseye,
+    Kali, and Ubuntu)
   # A dependency of aws/efs-utils can only be built using gcc<=13.
   # This is the reason for the export statements below.  See here for
   # more details:
   # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
   ansible.builtin.shell: |
-    export CC=gcc-13
-    export CXX=g++-13
+    export CC=gcc-{{ gcc_version }}
+    export CXX=g++-{{ gcc_version }}
     export RUSTFLAGS="-C linker=$CC"
     ./build-deb.sh
   args:
     chdir: /tmp/efs-utils
     creates: /tmp/efs-utils/build
   when:
-    - ansible_distribution_release not in ["buster", "bullseye", "bookworm", "jammy"]
+    - ansible_distribution_release not in ["buster", "bullseye"]
 
-- name: Build deb packages from the aws/efs-utils code (Debian Bookworm)
-  # A dependency of aws/efs-utils can only be built using gcc<=13.
-  # This is the reason for the export statements below.  See here for
-  # more details:
-  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
-  #
-  # Debian Bookworm only offers gcc 12 (i.e., not 13), so the
-  # installation is slightly different.
-  ansible.builtin.shell: |
-    export CC=gcc-12
-    export CXX=g++-12
-    export RUSTFLAGS="-C linker=$CC"
-    ./build-deb.sh
-  args:
-    chdir: /tmp/efs-utils
-    creates: /tmp/efs-utils/build
-  when: ansible_distribution_release in ["bookworm"]
-
-- name: Build deb packages from the aws/efs-utils code (Ubuntu Jammy)
-  # A dependency of aws/efs-utils can only be built using gcc<=13.
-  # This is the reason for the export statements below.  See here for
-  # more details:
-  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
-  #
-  # Ubuntu Jammy only offers gcc 10 and 11 (i.e., not 13), so the
-  # installation is slightly different.
-  ansible.builtin.shell: |
-    export CC=gcc-11
-    export CXX=g++-11
-    export RUSTFLAGS="-C linker=$CC"
-    ./build-deb.sh
-  args:
-    chdir: /tmp/efs-utils
-    creates: /tmp/efs-utils/build
-  when: ansible_distribution_release in ["jammy"]
-
-- name: Build deb packages from the aws/efs-utils code (Debian pre-Trixie)
+- name: Build deb packages from the aws/efs-utils code (Debian pre-Bookworm)
   ansible.builtin.command:
     chdir: /tmp/efs-utils
     cmd: ./build-deb.sh
