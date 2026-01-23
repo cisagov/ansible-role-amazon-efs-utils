@@ -2,7 +2,9 @@
 - name: Load tasks file with common install tasks
   ansible.builtin.include_tasks: install_common.yml
 
-- name: Build deb packages from the aws/efs-utils code (post-Bookworm and Kali)
+- name: >-
+    Build deb packages from the aws/efs-utils code (Debian post-Bookworm,
+    Kali, and Ubuntu Noble)
   # A dependency of aws/efs-utils can only be built using gcc<=13.
   # This is the reason for the export statements below.  See here for
   # more details:
@@ -15,9 +17,28 @@
   args:
     chdir: /tmp/efs-utils
     creates: /tmp/efs-utils/build
-  when: ansible_distribution_release not in ["buster", "bullseye", "bookworm"]
+  when:
+    - ansible_distribution_release not in ["buster", "bullseye", "bookworm", "jammy"]
 
-- name: Build deb packages from the aws/efs-utils code (pre-Trixie)
+- name: Build deb packages from the aws/efs-utils code (Ubuntu Jammy)
+  # A dependency of aws/efs-utils can only be built using gcc<=13.
+  # This is the reason for the export statements below.  See here for
+  # more details:
+  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
+  #
+  # Ubuntu Jammy only offers gcc 10 and 11 (i.e., not 13), so the
+  # installation is slightly different.
+  ansible.builtin.shell: |
+    export CC=gcc-11
+    export CXX=g++-11
+    export RUSTFLAGS="-C linker=$CC"
+    ./build-deb.sh
+  args:
+    chdir: /tmp/efs-utils
+    creates: /tmp/efs-utils/build
+  when: ansible_distribution_release in ["jammy"]
+
+- name: Build deb packages from the aws/efs-utils code (Debian pre-Trixie)
   ansible.builtin.command:
     chdir: /tmp/efs-utils
     cmd: ./build-deb.sh

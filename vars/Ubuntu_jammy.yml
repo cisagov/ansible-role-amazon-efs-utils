@@ -1,1 +1,17 @@
-Debian_bookworm.yml
+---
+# The system packages to install.  See here for more details:
+# https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md
+package_names:
+  - binutils
+  - cargo
+  - cmake
+  - gcc-11
+  - g++-11
+  - gettext-base
+  - golang
+  - libssl-dev
+  - make
+  - pkgconf
+
+# The version of amazon-efs-utils to install.
+version: 2.4.1
