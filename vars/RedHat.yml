@@ -1,6 +1,6 @@
 ---
 # The system packages to install.  See here for more details:
-# https://github.com/aws/efs-utils/blob/v2.3.1/INSTALL.md
+# https://github.com/aws/efs-utils/blob/v2.3.3/INSTALL.md
 package_names:
   - cargo
   - gettext-envsubst
@@ -14,4 +14,4 @@ package_names:
 # under gcc<=13 and RedHat doesn't provide anything older than gcc 14.
 # See here for more details:
 # https://github.com/aws/efs-utils/blob/master/INSTALL.md#gcc-version-requirements
-version: 2.3.1
+version: 2.3.3
