@@ -20,6 +20,24 @@
   when:
     - ansible_distribution_release not in ["buster", "bullseye", "bookworm", "jammy"]
 
+- name: Build deb packages from the aws/efs-utils code (Debian Bookworm)
+  # A dependency of aws/efs-utils can only be built using gcc<=13.
+  # This is the reason for the export statements below.  See here for
+  # more details:
+  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
+  #
+  # Debian Bookworm only offers gcc 12 (i.e., not 13), so the
+  # installation is slightly different.
+  ansible.builtin.shell: |
+    export CC=gcc-12
+    export CXX=g++-12
+    export RUSTFLAGS="-C linker=$CC"
+    ./build-deb.sh
+  args:
+    chdir: /tmp/efs-utils
+    creates: /tmp/efs-utils/build
+  when: ansible_distribution_release in ["bookworm"]
+
 - name: Build deb packages from the aws/efs-utils code (Ubuntu Jammy)
   # A dependency of aws/efs-utils can only be built using gcc<=13.
   # This is the reason for the export statements below.  See here for
@@ -43,7 +61,7 @@
     chdir: /tmp/efs-utils
     cmd: ./build-deb.sh
     creates: /tmp/efs-utils/build
-  when: ansible_distribution_release in ["buster", "bullseye", "bookworm"]
+  when: ansible_distribution_release in ["buster", "bullseye"]
 
 - name: Find all aws/efs-utils deb packages that were built
   ansible.builtin.find:
