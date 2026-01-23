@@ -1,5 +1,6 @@
 ---
-# The system packages to install.
+# The system packages to install.  See here for more details:
+# https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md
 package_names:
   - binutils
   - cargo
