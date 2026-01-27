@@ -1,6 +1,6 @@
 ---
 # The system packages to install.  See here for more details:
-# https://github.com/aws/efs-utils/blob/v2.3.3/INSTALL.md
+# https://github.com/aws/efs-utils/blob/v2.3.3/README.md
 package_names:
   - cargo
   - gettext-envsubst
