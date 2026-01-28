@@ -2,9 +2,30 @@
 - name: Load tasks file with common install tasks
   ansible.builtin.include_tasks: install_common.yml
 
+- name: Create a symlink for snapd
+  ansible.builtin.file:
+    dest: /snap
+    group: root
+    owner: root
+    src: /var/lib/snapd/snap
+    state: link
+
+- name: Install gcc-13 via snapd
+  community.general.snap:
+    name:
+      - gcc-13
+
 - name: Build rpms from the aws/efs-utils code
+  # A dependency of aws/efs-utils can only be built using gcc<=13.
+  # This is the reason for the params below.  See here for more
+  # details:
+  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
   community.general.make:
     chdir: /tmp/efs-utils
+    params:
+      CC: /var/lib/snapd/snap/bin/gcc-13
+      CXX: /var/lib/snapd/snap/bin/g++-13
+      RUSTFLAGS: -C linker=/var/lib/snapd/snap/bin/gcc-13
     target: rpm
   # This task always runs and recreates the rpms, no matter what.
   # Let's ignore this task when running the idempotence check.

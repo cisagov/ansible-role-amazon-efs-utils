@@ -11,6 +11,9 @@ package_names:
   - openssl-devel
   - openssl-devel-engine
   - rpm-build
+  # Fedora 42 and 43 do not offer gcc<=13, so we have to install it
+  # via snapd.
+  - snapd
 
 # The version of amazon-efs-utils to install.
 version: 2.4.1
