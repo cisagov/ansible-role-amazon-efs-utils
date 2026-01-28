@@ -1,1 +1,12 @@
-Debian_bookworm.yml
+# The system packages to install.  See here for more details:
+# https://github.com/aws/efs-utils/blob/v1.36.0/README.md
+package_names:
+  - binutils
+  - make
+  - pkgconf
+
+# The version of amazon-efs-utils to install.
+#
+# Debian Buster has too old a version of the Cargo/Rust toolchain to
+# build version >=2.
+version: 1.36.0

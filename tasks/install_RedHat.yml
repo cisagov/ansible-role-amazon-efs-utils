@@ -21,4 +21,4 @@
   ansible.builtin.dnf:
     disable_gpg_check: true
     name: "{{ item }}"
-  loop: "{{ find_result | json_query('files[*].path') }}"
+  loop: "{{ find_result | community.general.json_query('files[*].path') }}"

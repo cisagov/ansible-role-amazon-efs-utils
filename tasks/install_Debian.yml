@@ -2,11 +2,30 @@
 - name: Load tasks file with common install tasks
   ansible.builtin.include_tasks: install_common.yml
 
-- name: Build deb packages from the aws/efs-utils code
-  ansible.builtin.command: ./build-deb.sh
+- name: >-
+    Build deb packages from the aws/efs-utils code (Debian post-Bullseye,
+    Kali, and Ubuntu)
+  # A dependency of aws/efs-utils can only be built using gcc<=13.
+  # This is the reason for the export statements below.  See here for
+  # more details:
+  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
+  ansible.builtin.shell: |
+    export CC=gcc-{{ gcc_version }}
+    export CXX=g++-{{ gcc_version }}
+    export RUSTFLAGS="-C linker=$CC"
+    ./build-deb.sh
   args:
     chdir: /tmp/efs-utils
     creates: /tmp/efs-utils/build
+  when:
+    - ansible_distribution_release not in ["buster", "bullseye"]
+
+- name: Build deb packages from the aws/efs-utils code (Debian pre-Bookworm)
+  ansible.builtin.command:
+    chdir: /tmp/efs-utils
+    cmd: ./build-deb.sh
+    creates: /tmp/efs-utils/build
+  when: ansible_distribution_release in ["buster", "bullseye"]
 
 - name: Find all aws/efs-utils deb packages that were built
   ansible.builtin.find:
@@ -17,4 +36,4 @@
 - name: Install aws/efs-utils deb packages
   ansible.builtin.apt:
     deb: "{{ item }}"
-  loop: "{{ find_result | json_query('files[*].path') }}"
+  loop: "{{ find_result | community.general.json_query('files[*].path') }}"

@@ -1,1 +1,19 @@
-Debian_bookworm.yml
+---
+# The system packages to install.  See here for more details:
+# https://github.com/aws/efs-utils/blob/v2.3.3/README.md
+package_names:
+  - binutils
+  # The cargo package provides an ancient version but cargo-web
+  # provides a much more recent version.  This is what allows us to
+  # install version 2.3 on this platform.
+  - cargo-web
+  - gettext-base
+  - libssl-dev
+  - make
+  - pkgconf
+
+# The version of amazon-efs-utils to install.
+#
+# Debian Bookworm has too old a version of the Go toolchain to build
+# version >=2.4.
+version: 2.3.3
