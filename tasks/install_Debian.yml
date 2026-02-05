@@ -13,7 +13,7 @@
     chdir: /tmp/efs-utils
     params:
       CC: gcc-{{ gcc_version }}
-      CXX: g++{{ gcc_version }}
+      CXX: g++-{{ gcc_version }}
       RUSTFLAGS: -C linker=gcc-{{ gcc_version }}
     target: deb
   # This task always runs and recreates the debs, no matter what.
