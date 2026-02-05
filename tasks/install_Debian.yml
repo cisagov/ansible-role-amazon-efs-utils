@@ -5,26 +5,32 @@
 - name: >-
     Build deb packages from the aws/efs-utils code (Debian post-Bullseye,
     Kali, and Ubuntu)
-  # A dependency of aws/efs-utils can only be built using gcc<=13.
-  # This is the reason for the export statements below.  See here for
-  # more details:
+  # A dependency of aws/efs-utils (aws/aws-lc-rs) can only be built
+  # using gcc<=13.  This is the reason for the params below.  See here
+  # for more details:
   # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
-  ansible.builtin.shell: |
-    export CC=gcc-{{ gcc_version }}
-    export CXX=g++-{{ gcc_version }}
-    export RUSTFLAGS="-C linker=$CC"
-    ./build-deb.sh
-  args:
+  community.general.make:
     chdir: /tmp/efs-utils
-    creates: /tmp/efs-utils/build
+    params:
+      CC: gcc-{{ gcc_version }}
+      CXX: g++-{{ gcc_version }}
+      RUSTFLAGS: -C linker=gcc-{{ gcc_version }}
+    target: deb
+  # This task always runs and recreates the debs, no matter what.
+  # Let's ignore this task when running the idempotence check.
+  tags:
+    - molecule-idempotence-notest
   when:
     - ansible_distribution_release not in ["buster", "bullseye"]
 
 - name: Build deb packages from the aws/efs-utils code (Debian pre-Bookworm)
-  ansible.builtin.command:
+  community.general.make:
     chdir: /tmp/efs-utils
-    cmd: ./build-deb.sh
-    creates: /tmp/efs-utils/build
+    target: deb
+  # This task always runs and recreates the debs, no matter what.
+  # Let's ignore this task when running the idempotence check.
+  tags:
+    - molecule-idempotence-notest
   when: ansible_distribution_release in ["buster", "bullseye"]
 
 - name: Find all aws/efs-utils deb packages that were built
