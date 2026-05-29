@@ -42,5 +42,6 @@ galaxy_info:
       versions:
         - jammy
         - noble
+        - resolute
   role_name: amazon_efs_utils
   standalone: true
