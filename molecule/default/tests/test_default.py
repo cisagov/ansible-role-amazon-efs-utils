@@ -18,7 +18,7 @@ def test_packages(host):
     codename = host.system_info.codename
     release = host.system_info.release
     if distribution in ["fedora"]:
-        if any([release.startswith(version) for version in ["39", "40"]]):
+        if any(release.startswith(version) for version in ["39", "40"]):
             pkgs = [
                 "amazon-efs-utils",
                 "cargo",
