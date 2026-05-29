@@ -53,7 +53,7 @@ def test_packages(host):
         pkgs = ["amazon-efs-utils"]
     else:
         # We don't support this distribution
-        assert False, f"Unsupported distribution {distribution}"
+        raise ValueError(f"Unsupported distribution {distribution}")
     packages = [host.package(pkg) for pkg in pkgs]
     installed = [package.is_installed for package in packages]
     assert len(pkgs) != 0
