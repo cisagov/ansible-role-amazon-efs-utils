@@ -5,7 +5,7 @@
 gcc_version: 13
 
 # The system packages to install.  See here for more details:
-# https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md
+# https://github.com/aws/efs-utils/blob/v2.4.2/INSTALL.md
 package_names:
   - binutils
   - cargo
@@ -19,4 +19,4 @@ package_names:
   - pkgconf
 
 # The version of amazon-efs-utils to install.
-version: 2.4.1
+version: 2.4.2
