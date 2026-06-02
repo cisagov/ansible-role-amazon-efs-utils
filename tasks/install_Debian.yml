@@ -8,7 +8,7 @@
   # A dependency of aws/efs-utils (aws/aws-lc-rs) can only be built
   # using gcc<=13.  This is the reason for the params below.  See here
   # for more details:
-  # https://github.com/aws/efs-utils/blob/v2.4.1/INSTALL.md#gcc-version-requirements
+  # https://github.com/aws/efs-utils/blob/v2.4.2/INSTALL.md#gcc-version-requirements
   community.general.make:
     chdir: /tmp/efs-utils
     params:

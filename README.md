@@ -14,7 +14,7 @@ None.
 ## Role Variables ##
 
 | Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
+| -------- | ----------- | ------- | -------- |
 | amazon_efs_utils_create_efs_users_group | Whether or not to create a group for EFS share users. | `true` | No |
 | amazon_efs_utils_efs_users_gid | The GID to assign the group for EFS share users. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | amazon_efs_utils_efs_users_group | The name of group to be created for EFS share users. | `efs_users` | No |
