@@ -42,6 +42,8 @@ galaxy_info:
       versions:
         - jammy
         - noble
-        - resolute
+        # TODO: #75 - aws/efs-utils does not yet support Ubuntu 26.04,
+        # but we should support it once that becomes possible.
+        # - resolute
   role_name: amazon_efs_utils
   standalone: true
