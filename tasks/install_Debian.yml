@@ -3,8 +3,8 @@
   ansible.builtin.include_tasks: install_common.yml
 
 - name: >-
-    Build deb packages from the aws/efs-utils code (Debian post-Bullseye,
-    Kali, and Ubuntu)
+    Build deb packages from the aws/efs-utils code (Debian post-Bullseye and
+    Kali)
   # A dependency of aws/efs-utils (aws/aws-lc-rs) can only be built
   # using gcc<=13.  This is the reason for the params below.  See here
   # for more details:
