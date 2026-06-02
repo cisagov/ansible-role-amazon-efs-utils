@@ -1,0 +1,32 @@
+---
+- name: Add official aws/efs-utils repo
+  block:
+    - name: Install prerequisites so apt can use DEB822 repos
+      ansible.builtin.package:
+        name:
+          - python3-debian
+
+    - name: Add the official aws/efs-utils repo
+      ansible.builtin.deb822_repository:
+        components:
+          - main
+        name: efs-utils
+        signed_by: https://amazon-efs-utils.aws.com/efs-utils-armored.gpg
+        suites:
+          - "{{ ansible_facts['distribution_version'] }}"
+        uris:
+          - >-
+            https://amazon-efs-utils.aws.com/repo/deb/ubuntu/{{
+            ansible_facts['distribution_version'] }}
+      notify:
+        - Update the package cache
+
+    # We need the handler that updates the apt package cache to run
+    # now if it is necessary.
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+
+- name: Install amazon-efs-utils
+  ansible.builtin.package:
+    name:
+      - amazon-efs-utils
