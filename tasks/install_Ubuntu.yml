@@ -18,15 +18,9 @@
           - >-
             https://amazon-efs-utils.aws.com/repo/deb/ubuntu/{{
             ansible_facts['distribution_version'] }}
-      notify:
-        - Update the package cache
-
-    # We need the handler that updates the apt package cache to run
-    # now if it is necessary.
-    - name: Flush handlers
-      ansible.builtin.meta: flush_handlers
 
 - name: Install amazon-efs-utils
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name:
       - amazon-efs-utils
+    update_cache: true
