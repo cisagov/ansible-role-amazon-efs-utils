@@ -35,15 +35,14 @@ def test_packages(host):
                 "openssl-devel-engine",
                 "rpm-build",
             ]
-    elif distribution in ["debian", "kali", "ubuntu"]:
+    elif distribution in ["ubuntu"]:
+        pkgs = ["amazon-efs-utils"]
+    elif distribution in ["debian", "kali"]:
         if codename in [
             "buster",
             "bullseye",
             "bookworm",
             "focal",
-            "jammy",
-            "noble",
-            "resolute",
         ]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
