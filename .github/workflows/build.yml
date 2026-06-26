@@ -234,10 +234,7 @@ jobs:
           - kali-systemd
           - ubuntu-22-systemd
           - ubuntu-24-systemd
-          # TODO: #75 - aws/efs-utils does not yet support Ubuntu
-          # 26.04, but we should support it once that becomes
-          # possible.
-          # - ubuntu-26-systemd
+          - ubuntu-26-systemd
         scenario:
           - default
     steps:
