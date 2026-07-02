@@ -32,7 +32,6 @@ def test_packages(host):
             "buster",
             "bullseye",
             "bookworm",
-            "focal",
         ]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
