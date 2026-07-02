@@ -6,6 +6,15 @@
         name:
           - python3-debian
 
+    - name: Set a variable containing the suite to use
+      ansible.builtin.set_fact:
+        # aws/efs-utils does not yet offer packages for Ubuntu
+        # Resolute, but the packages for Noble work fine on Resolute.
+        suite: >-
+          {{ ansible_distribution_version
+          if ansible_distribution_version != '26.04'
+          else '24.04' }}
+
     - name: Add the official aws/efs-utils repo
       ansible.builtin.deb822_repository:
         components:
@@ -13,11 +22,9 @@
         name: efs-utils
         signed_by: https://amazon-efs-utils.aws.com/efs-utils-armored.gpg
         suites:
-          - "{{ ansible_facts['distribution_version'] }}"
+          - "{{ suite }}"
         uris:
-          - >-
-            https://amazon-efs-utils.aws.com/repo/deb/ubuntu/{{
-            ansible_facts['distribution_version'] }}
+          - https://amazon-efs-utils.aws.com/repo/deb/ubuntu/{{ suite }}
 
 - name: Install amazon-efs-utils
   ansible.builtin.apt:

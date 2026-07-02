@@ -16,29 +16,23 @@ def test_packages(host):
     """Test that the appropriate packages were installed."""
     distribution = host.system_info.distribution
     codename = host.system_info.codename
-    release = host.system_info.release
     if distribution in ["fedora"]:
-        if any(release.startswith(version) for version in ["39", "40"]):
-            pkgs = [
-                "amazon-efs-utils",
-                "cargo",
-                "make",
-                "openssl-devel",
-                "rpm-build",
-            ]
-        else:
-            pkgs = [
-                "amazon-efs-utils",
-                "cargo",
-                "make",
-                "openssl-devel",
-                "openssl-devel-engine",
-                "rpm-build",
-            ]
-    elif distribution in ["debian", "kali", "ubuntu"]:
-        # TODO - Install version 2.x on Ubuntu Jammy and Noble when
-        # possible.  See #53 for more details.
-        if codename in ["buster", "bullseye", "bookworm", "focal", "jammy", "noble"]:
+        pkgs = [
+            "amazon-efs-utils",
+            "cargo",
+            "make",
+            "openssl-devel",
+            "openssl-devel-engine",
+            "rpm-build",
+        ]
+    elif distribution in ["ubuntu"]:
+        pkgs = ["amazon-efs-utils"]
+    elif distribution in ["debian", "kali"]:
+        if codename in [
+            "buster",
+            "bullseye",
+            "bookworm",
+        ]:
             pkgs = ["amazon-efs-utils", "binutils", "make"]
         else:
             pkgs = [
