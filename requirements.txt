@@ -1,2 +1,2 @@
 jmespath
-setuptools>=70.1
+setuptools>=82.0.1
