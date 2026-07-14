@@ -6,6 +6,8 @@
   community.general.make:
     chdir: /tmp/efs-utils
     target: rpm
+  environment:
+    RUST_BACKTRACE: "1"
   # This task always runs and recreates the rpms, no matter what.
   # Let's ignore this task when running the idempotence check.
   tags:
