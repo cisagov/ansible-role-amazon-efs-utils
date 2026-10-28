@@ -1,11 +1,19 @@
 ---
-# The system packages to install.  See here for more details:
-# https://github.com/aws/efs-utils/blob/v2.4.2/README.md
+# The system packages required to build RPMs from the efs-utils
+# source.  See here for more details:
+# https://github.com/aws/efs-utils/blob/v3.3.4/INSTALL.md
 package_names:
+  - binutils
   - cargo
+  - cmake3
+  - gcc
+  - g++
   - gettext-envsubst
+  - golang
   - make
   - openssl-devel
+  - openssl-devel-engine
   - rpm-build
 
-version: 2.4.2
+# The version of amazon-efs-utils to install
+version: 3.3.4
