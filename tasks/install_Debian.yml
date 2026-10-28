@@ -5,16 +5,12 @@
 - name: >-
     Build deb packages from the aws/efs-utils code (Debian post-Bullseye and
     Kali)
-  # A dependency of aws/efs-utils (aws/aws-lc-rs) can only be built
-  # using gcc<=13.  This is the reason for the params below.  See here
-  # for more details:
-  # https://github.com/aws/efs-utils/blob/v2.4.2/INSTALL.md#gcc-version-requirements
   community.general.make:
     chdir: /tmp/efs-utils
     params:
-      CC: gcc-{{ gcc_version }}
-      CXX: g++-{{ gcc_version }}
-      RUSTFLAGS: -C linker=gcc-{{ gcc_version }}
+      CC: gcc
+      CXX: g++
+      RUSTFLAGS: -C linker=gcc
     target: deb
   # This task always runs and recreates the debs, no matter what.
   # Let's ignore this task when running the idempotence check.
