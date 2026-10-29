@@ -1,4 +1,5 @@
-# The system packages to install.  See here for more details:
+# The system packages required to build DEBs from the efs-utils
+# source.  See here for more details:
 # https://github.com/aws/efs-utils/blob/v1.36.0/README.md
 package_names:
   - binutils
