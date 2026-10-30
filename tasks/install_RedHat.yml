@@ -5,6 +5,10 @@
 - name: Build rpms from the aws/efs-utils code
   community.general.make:
     chdir: /tmp/efs-utils
+    params:
+      CC: gcc
+      CXX: g++
+      RUSTFLAGS: -C linker=gcc
     target: rpm
   # This task always runs and recreates the rpms, no matter what.
   # Let's ignore this task when running the idempotence check.
