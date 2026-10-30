@@ -1,7 +1,7 @@
 ---
 # The system packages required to build DEBs from the efs-utils
 # source.  See here for more details:
-# https://github.com/aws/efs-utils/blob/v3.3.4/INSTALL.md
+# https://github.com/aws/efs-utils/blob/v3.3.5/INSTALL.md
 package_names:
   - binutils
   # cargo provides an ancient version, but cargo-web provides a much
@@ -17,4 +17,4 @@ package_names:
   - pkgconf
 
 # The version of amazon-efs-utils to install.
-version: 3.3.4
+version: 3.3.5
