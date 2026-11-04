@@ -19,31 +19,60 @@ def test_packages(host):
     if distribution in ["fedora"]:
         pkgs = [
             "amazon-efs-utils",
+            "binutils",
             "cargo",
+            "cmake3",
+            "gcc",
+            "g++",
+            "gettext-envsubst",
+            "golang",
             "make",
             "openssl-devel",
             "openssl-devel-engine",
             "rpm-build",
         ]
-    elif distribution in ["ubuntu"]:
-        pkgs = ["amazon-efs-utils"]
     elif distribution in ["debian", "kali"]:
-        if codename in [
-            "buster",
-            "bullseye",
-            "bookworm",
-        ]:
-            pkgs = ["amazon-efs-utils", "binutils", "make"]
+        if codename in ["buster"]:
+            pkgs = ["amazon-efs-utils", "binutils", "make", "pkgconf"]
+        elif codename in ["bullseye", "bookworm"]:
+            pkgs = [
+                "amazon-efs-utils",
+                "binutils",
+                "cargo-web",
+                "gettext-base",
+                "libssl-dev",
+                "make",
+                "pkgconf",
+            ]
+        elif codename in ["bookworm", "trixie"]:
+            pkgs = [
+                "amazon-efs-utils",
+                "binutils",
+                "cargo-web",
+                "cmake",
+                "gcc",
+                "g++",
+                "gettext-base",
+                "golang",
+                "libssl-dev",
+                "make",
+                "pkgconf",
+            ]
         else:
             pkgs = [
                 "amazon-efs-utils",
                 "binutils",
                 "cargo",
+                "cmake",
+                "gcc",
+                "g++",
+                "gettext-base",
+                "golang",
                 "libssl-dev",
                 "make",
                 "pkgconf",
             ]
-    elif distribution in ["amzn"]:
+    elif distribution in ["amzn", "ubuntu"]:
         pkgs = ["amazon-efs-utils"]
     else:
         # We don't support this distribution
