@@ -5,9 +5,9 @@
 package_names:
   - binutils
   - cargo
-  - cmake3
+  - cmake
   - gcc
-  - g++
+  - gcc-c++
   - gettext-envsubst
   - golang
   - make
